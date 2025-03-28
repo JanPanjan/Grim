@@ -1,15 +1,5 @@
 # Grim
-- terminal pixel based RPG
-- turn based combat
-  - Mario Luigi superstar saga combat...? So it feels more souls-like
-- dog companion
-- weapons, armor, enhancements,...
-- fiends, beasts, curses, extremas, hybrids,...
-- grim dark bloodbourne medieval type world
-- open-wordly
-  - maybe some areas will be locked
-  - maybe a guide like elden ring (haven't played through a whole dark souls game, so I don't know how it's executed fully)
-- achievement system
+terminal based card game.
 
 ## Roadmap
 - [ ] learn how to use `ncurses` library
