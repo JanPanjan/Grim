@@ -7,7 +7,7 @@
 
 #include <ncurses.h>
 
-void init_ncurses();
-void cleanup_ncurses();
+void initNcurses();
+void cleanupNcurses();
 
 #endif //GRIM_NCURSES_UTILS_H

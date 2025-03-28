@@ -13,11 +13,8 @@ typedef enum CardType {
 
 typedef struct Card {
     char* name;
-    int mana_cost;
+    int manaCost;
     CardType type;
-    // ... other card attributes (effect, etc.)
 } Card;
-
-// Functions for card manipulation (e.g., create_card, display_card)
 
 #endif //GRIM_CARD_H

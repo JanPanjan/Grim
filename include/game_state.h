@@ -13,6 +13,7 @@
  */
 #define MAX_HAND_SIZE 8
 #define DECK_SIZE 60
+#define MAX_CREATURE_COUNT 4
 
 /*
  * Players have mutable HP and a hand with MAX_HAND_SIZE cards. It also stores current
@@ -21,7 +22,7 @@
 typedef struct Player {
     int HP;
     Card hand[MAX_HAND_SIZE];
-    unsigned int hand_size;
+    unsigned int handSize;
 } Player;
 
 /*
@@ -31,23 +32,23 @@ typedef struct Player {
 typedef struct GameState {
     Player player;
     Player computer;
-    Card player_deck[DECK_SIZE];
-    Card computer_deck[DECK_SIZE];
+    Card playerDeck[DECK_SIZE];
+    Card computerDeck[DECK_SIZE];
 } GameState;
 
 /* Initializes the GameState. */
-void initialize_game_state(GameState *state);
+void initializeGameState(GameState *state);
 
 /* Initializes all players' attributes. */
-void initialize_players(GameState *state);
+void initializePlayers(GameState *state);
 
 /* Fills the given Player's deck with cards. */
-void initialize_decks(GameState *state);
+void initializeDecks(GameState *state);
 
 /* Creates a card of a given name, mana cost and type and saves it in a Player's deck. */
-void initialize_card(GameState *state, int i, char* name, int mana_cost, CardType card_type);
+void initializeCard(GameState *state, int i, char* name, int manaCost, CardType cardType);
 
 /* Displays the current game state. */
-void print_game_state(GameState *state, int deck);
+void printGameState(GameState *state, int deck);
 
 #endif //GRIM_GAME_STATE_H

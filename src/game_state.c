@@ -12,53 +12,53 @@
  * 20 creatures and 20 sorceries.
  */
 void
-initialize_game_state(GameState *state) {
+initializeGameState(GameState *state) {
     // Initialize player and computer
-    initialize_players(state);
-    initialize_decks(state);
+    initializePlayers(state);
+    initializeDecks(state);
 }
 
 void
-initialize_players(GameState *state) {
+initializePlayers(GameState *state) {
     state->player.HP = 20;
-    state->player.hand_size = 0;
+    state->player.handSize = 0;
     state->computer.HP = 20;
-    state->computer.hand_size = 0;
+    state->computer.handSize = 0;
 }
 
 void
-initialize_decks(GameState *state) {
+initializeDecks(GameState *state) {
     srand(time(NULL));
 
     for (int i = 0; i < DECK_SIZE; i++){
         if (i < 20) { // land
-            initialize_card(state, i, "land", 0, LAND);
+            initializeCard(state, i, "land", 0, LAND);
         }
         if (i >= 20 && i < 40) { // creature
-            initialize_card(state, i, "creature", rand() % 10, CREATURE);
+            initializeCard(state, i, "creature", rand() % 10, CREATURE);
         }
         if (i >= 40) { // sorcery
-            initialize_card(state, i, "sorcery", rand() % 8,  SORCERY);
+            initializeCard(state, i, "sorcery", rand() % 8, SORCERY);
         }
     }
 }
 
 void
-initialize_card(GameState *state, const int i, char* name, const int mana_cost, const CardType card_type) {
-    state->player_deck[i].name = name;
-    state->player_deck[i].mana_cost = mana_cost;
-    state->player_deck[i].type = card_type;
+initializeCard(GameState *state, int i, char* name, int manaCost, CardType cardType) {
+    state->playerDeck[i].name = name;
+    state->playerDeck[i].manaCost = manaCost;
+    state->playerDeck[i].type = cardType;
 
-    state->computer_deck[i].name = name;
-    state->computer_deck[i].mana_cost = mana_cost;
-    state->computer_deck[i].type = card_type;
+    state->computerDeck[i].name = name;
+    state->computerDeck[i].manaCost = manaCost;
+    state->computerDeck[i].type = cardType;
 }
 
 /*
  * Prints the current game state. If `deck` is 0, the decks are not printed.
  */
 void
-print_game_state(GameState *state, int deck) {
+printGameState(GameState *state, int deck) {
     printf("Player HP: %d\n", state->player.HP);
     printf("Computer HP: %d\n", state->computer.HP);
 
@@ -68,12 +68,12 @@ print_game_state(GameState *state, int deck) {
 
     printf("\nPlayer Deck:\n");
     for (int i = 0; i < DECK_SIZE; i++) {
-        printf("  Card %d: %s, Mana: %d, Type: %d\n", i, state->player_deck[i].name, state->player_deck[i].mana_cost, state->player_deck[i].type);
+        printf("  Card %d: %s, Mana: %d, Type: %d\n", i, state->playerDeck[i].name, state->playerDeck[i].manaCost, state->playerDeck[i].type);
     }
 
     printf("\nComputer Deck:\n");
     for (int i = 0; i < DECK_SIZE; i++) {
-        printf("  Card %d: %s, Mana: %d, Type: %d\n", i, state->computer_deck[i].name, state->computer_deck[i].mana_cost, state->computer_deck[i].type);
+        printf("  Card %d: %s, Mana: %d, Type: %d\n", i, state->computerDeck[i].name, state->computerDeck[i].manaCost, state->computerDeck[i].type);
     }
     printf("\n");
 }

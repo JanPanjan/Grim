@@ -4,7 +4,7 @@
 
 #include "../include/ncurses_utils.h"
 
-void init_ncurses() {
+void initNcurses() {
     initscr();
     cbreak();
     noecho();
@@ -12,6 +12,6 @@ void init_ncurses() {
     curs_set(0);
 }
 
-void cleanup_ncurses() {
+void cleanupNcurses() {
     endwin();
 }

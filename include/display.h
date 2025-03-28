@@ -10,20 +10,53 @@
 
 /* Structure to hold display state */
 typedef struct {
-    int max_y;
-    int max_x;
+    int maxY;
+    int maxX;
 } DisplayState;
 
+typedef struct PlayerWin {
+    WINDOW *grave;
+    WINDOW *deck;
+    WINDOW *hand;
+    WINDOW *prompts;
+    WINDOW *stats;
+} PlayerWin;
+
+typedef struct EnemyWin {
+    WINDOW *grave;
+    WINDOW *deck;
+    WINDOW *hand;
+    WINDOW *stats;
+} EnemyWin;
+
+/* Each player has multiple card slots in his battlefield. Each card is its own window. */
+typedef struct BattleField {
+    WINDOW *player[MAX_CREATURE_COUNT];
+    WINDOW *enemy[MAX_CREATURE_COUNT];
+} BattleField;
+
+typedef struct GameBoard {
+    PlayerWin *playerWin;
+    EnemyWin *enemyWin;
+    BattleField *battleField;
+} GameBoard;
+
 /* Initializes the display state with details of the current window */
-void init_display_state(DisplayState *display_state);
+void initDisplayState(DisplayState *displayState);
 
-/* Creates the battlefield window */
-WINDOW *create_battlefield_window(DisplayState *display_state);
+/* Functions to create the game windows and populate the GameBoard struct */
+void createGameBoardWindows(DisplayState *displayState, GameBoard *gameBoard);
+void createPlayerWindows(DisplayState *displayState, PlayerWin *playerWin);
+void createEnemyWindows(DisplayState *displayState, EnemyWin *enemyWin);
+void createBattleFieldWindows(DisplayState *displayState, BattleField *battleField);
 
-/* Displays the GameBoard's battlefield - the main view */
-void display_battlefield(WINDOW *battlefield_win, DisplayState *display_state);
+// Cleans up game board windows
+void terminateGameBoardWindows(GameBoard *gameBoard);
+
+// Function to display the game board
+void displayGameBoard(GameBoard *gameBoard);
 
 /* Displays the start screen */
-void display_start_screen(DisplayState *display_state);
+void displayStartScreen(DisplayState *displayState);
 
 #endif //GRIM_DISPLAY_H
