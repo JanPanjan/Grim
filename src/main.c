@@ -1,36 +1,28 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <curses.h>
+#include "../include/ncurses_utils.h"
+#include "../include/game_state.h"
+#include "../include/display.h"
+#include "../include/input.h"
 
 int main() {
+    init_ncurses();
+
+    DisplayState display_state;
+    init_display_state(&display_state);
+
+    display_start_screen(&display_state);
+
     int ch;
-    int x = 92;
-    int y = 23;
+    while ((ch = getch()) != '\n');
 
-    initscr();            /* Start curses mode 		*/
-    raw();                /* Line buffering disabled	*/
-    keypad(stdscr, TRUE); /* We get F1, F2 etc..		*/
-    noecho();             /* Don't echo() while we do getch */
+    GameState game_state;
+    initialize_game_state(&game_state);
 
-    /* ko klikam karkoli se menja napis iz non-bold v bold */
-    char* title = "G R I M\n";
-    int bold = 0; // false
+    WINDOW *battlefield_win = create_battlefield_window(&display_state);
+    display_battlefield(battlefield_win, &display_state);
 
-    mvprintw(y, x, title);
+    getch();
 
-    while ((ch = getch()) != KEY_BACKSPACE) {
-        if (bold == 0) {
-            attron(A_BOLD);
-            mvprintw(y, x, title);
-            bold = 1;
-        } else {
-            attroff(A_BOLD);
-            mvprintw(y, x, title);
-            bold = 0;
-        }
-        refresh();  /* Print it on to the real screen */
-    }
-    endwin();   /* End curses mode		  */
-
+    delwin(battlefield_win);
+    cleanup_ncurses();
     return 0;
 }
