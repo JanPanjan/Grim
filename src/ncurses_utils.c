@@ -9,7 +9,7 @@ void initNcurses() {
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-    curs_set(0);
+//   kaj to naredi? curs_set(0);
 }
 
 void cleanupNcurses() {

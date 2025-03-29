@@ -13,7 +13,7 @@ typedef enum CardType {
 
 typedef struct Card {
     char* name;
-    int manaCost;
+    unsigned int manaCost;
     CardType type;
 } Card;
 

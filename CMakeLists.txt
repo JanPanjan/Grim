@@ -14,6 +14,7 @@ ADD_EXECUTABLE(Grim
         src/card.c
         src/display.c
         src/input.c
+        src/log.c
 )
 
 # Link against ncurses

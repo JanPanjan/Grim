@@ -5,16 +5,24 @@
 #include <string.h>
 #include <assert.h>
 
+#define ENEMY_WIN_HEIGHT 10
+
+#define GRAVE_WIDTH 5
+#define DECK_WIDTH 5
+#define HAND_WIDTH 50
+#define STATS_WIDTH 20
+
 void
-initDisplayState(DisplayState *displayState) {
+saveDisplayState(DisplayState *displayState, WINDOW *win) {
     getmaxyx(stdscr, displayState->maxY, displayState->maxX);
+    displayState->win = win;
 }
 
 void
 createGameBoardWindows(DisplayState *displayState, GameBoard *gameBoard) {
-    createPlayerWindows(displayState, gameBoard->playerWin);
+//    createPlayerWindows(displayState, gameBoard->playerWin);
     createEnemyWindows(displayState, gameBoard->enemyWin);
-    createBattleFieldWindows(displayState, gameBoard->battleField);
+//    createBattleFieldWindows(displayState, gameBoard->battleField);
 }
 
 void createPlayerWindows(DisplayState *displayState, PlayerWin *playerWin) {
@@ -52,27 +60,23 @@ createEnemyWindows(DisplayState *displayState, EnemyWin *enemyWin) {
     int maxY = displayState->maxY;
     int maxX = displayState->maxX;
 
-    int enemyHeight = 3;
-    int enemyStatsWidth = maxX / 3;
-    int enemyHandCountWidth = maxX / 3;
-    int enemyGraveyardDeckWidth = maxX / 3;
-
-
-    enemyWin->grave = newwin(enemyHeight, enemyGraveyardDeckWidth, 0, 0);
+    enemyWin->grave = newwin(ENEMY_WIN_HEIGHT, GRAVE_WIDTH, 0, 0);
     assert(enemyWin->grave != NULL);
     box(enemyWin->grave, 0, 0);
 
-    enemyWin->deck = newwin(enemyHeight, enemyGraveyardDeckWidth, 0, 0);
+    /*
+    enemyWin->deck = newwin(height, graveDeckWidth, 0, 0);
     assert(enemyWin->deck != NULL);
     box(enemyWin->deck, 0, 0);
 
-    enemyWin->hand = newwin(enemyHeight, enemyHandCountWidth, 0, enemyGraveyardDeckWidth);
+    enemyWin->hand = newwin(height, handWidth, 0, graveDeckWidth);
     assert(enemyWin->hand != NULL);
     box(enemyWin->hand, 0, 0);
 
-    enemyWin->stats = newwin(enemyHeight, enemyStatsWidth, 0, maxX - enemyStatsWidth);
+    enemyWin->stats = newwin(height, statsWidth, 0, maxX - statsWidth);
     assert(enemyWin->stats != NULL);
     box(enemyWin->stats, 0, 0);
+    */
 }
 
 void
@@ -130,25 +134,49 @@ displayGameBoard(GameBoard *gameBoard) {
 
 void
 displayStartScreen(DisplayState *displayState) {
-    char greeting[] = "Welcome to Grim!";
-    char instruction[] = "Press ";
-    char enterText[] = "Enter";
-    char instructionEnd[] = " to start...";
+    int maxX = displayState->maxX;
+    int maxY = displayState->maxY;
 
-    int greetingY = displayState->maxY / 2 - 1;
-    int greetingX = (int)(displayState->maxX - strlen(greeting)) / 2;
-    int instructionY = displayState->maxY / 2 + 1;
-    int instructionX = (int)(displayState->maxX - (strlen(instruction) + strlen(enterText) + strlen(instructionEnd))) / 2;
+    char greeting[] = "Welcome to Grim.";
+    char enterStart[] = "Press ";
+    char enterKey[] = "Enter";
+    char enterEnd[] = " to start..";
 
+    char quitStart[] = "Press ";
+    char quitKey[] = "Q";
+    char quitEnd[] = " to quit..";
+
+    int greetingY = maxY / 2 - 1;
+    int greetingX = (int)(maxX - strlen(greeting)) / 2;
     mvprintw(greetingY, greetingX, "%s", greeting);
 
-    instructionX += (int)strlen(instruction);
-    attron(A_BOLD);
-    mvprintw(instructionY, instructionX, "%s", enterText);
-    attroff(A_BOLD);
+    /*
+     * Start by printing "Press ", then increment x by length of this string.
+     * Write out "enter" in bold and increment. Lastly write out " to start..".
+     */
+    int enterY = maxY / 2 + 1;
+    int wholeEnterX = (int) (maxX - (strlen(enterStart) + strlen(enterKey) + strlen(enterEnd)));
+    int enterX = wholeEnterX / 2;
 
-    instructionX += (int)strlen(enterText);
-    mvprintw(instructionY, instructionX, "%s", instructionEnd);
+    mvprintw(enterY, enterX, "%s", enterStart);
+    enterX += (int)strlen(enterStart);
+    attron(A_BOLD);
+    mvprintw(enterY, enterX, "%s", enterKey);
+    attroff(A_BOLD);
+    enterX += (int)strlen(enterKey);
+    mvprintw(enterY, enterX, "%s", enterEnd);
+
+    int quitY = maxY / 2 + 3;
+    int wholeQuitX = (int) (maxX - (strlen(quitStart) + strlen(quitKey) + strlen(quitEnd)));
+    int quitX = wholeQuitX / 2;
+
+    mvprintw(quitY, quitX, "%s", quitStart);
+    quitX += (int)strlen(quitStart);
+    attron(A_BOLD);
+    mvprintw(quitY, quitX, "%s", quitKey);
+    attroff(A_BOLD);
+    quitX += (int)strlen(quitKey);
+    mvprintw(quitY, quitX, "%s", quitEnd);
 
     refresh();
 }

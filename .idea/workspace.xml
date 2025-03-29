@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -23,11 +26,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cfe5892-e7c8-42fb-acdf-cdf801336061" name="Changes" comment="">
+    <list default="true" id="1cfe5892-e7c8-42fb-acdf-cdf801336061" name="Changes" comment="segfault somewhere">
+      <change afterPath="$PROJECT_DIR$/include/log.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/log.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/card.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/card.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/display.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/display.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/game_state.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/game_state.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/display.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/display.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game_state.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/game_state.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ncurses_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ncurses_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,12 +112,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Grim" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Grim" TARGET_NAME="Grim" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Grim" RUN_TARGET_NAME="Grim">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Grim" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Grim" TARGET_NAME="Grim" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Grim" RUN_TARGET_NAME="Grim">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -132,7 +142,9 @@
       <workItem from="1742831596665" duration="106000" />
       <workItem from="1742923993962" duration="441000" />
       <workItem from="1743167792685" duration="9669000" />
-      <workItem from="1743186242982" duration="4167000" />
+      <workItem from="1743186242982" duration="9429000" />
+      <workItem from="1743252079688" duration="5933000" />
+      <workItem from="1743260748180" duration="5859000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -150,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743177561599</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="segfault somewhere">
+      <option name="closed" value="true" />
+      <created>1743197105110</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1743197105110</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +207,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="battlefield drawn. game state initialized." />
-    <option name="LAST_COMMIT_MESSAGE" value="battlefield drawn. game state initialized." />
+    <MESSAGE value="segfault somewhere" />
+    <option name="LAST_COMMIT_MESSAGE" value="segfault somewhere" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
