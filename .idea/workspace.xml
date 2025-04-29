@@ -16,9 +16,7 @@
     <option name="reloaded" value="true" />
   </component>
   <component name="CMakeRunConfigurationManager">
-    <generated>
-      <config projectName="Grim" targetName="Grim" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -27,17 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cfe5892-e7c8-42fb-acdf-cdf801336061" name="Changes" comment="segfault somewhere">
-      <change afterPath="$PROJECT_DIR$/include/log.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/log.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/card.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/card.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/display.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/display.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/game_state.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/game_state.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/display.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/display.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game_state.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/game_state.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ncurses_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ncurses_utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +64,7 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2uiduVl9jbc2LUPvJP6GBGlygm8" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -94,7 +82,7 @@
     &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;rust&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/pogacha/progAAAAAAA/Grim&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -110,18 +98,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/include" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Grim" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Grim" TARGET_NAME="Grim" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Grim" RUN_TARGET_NAME="Grim">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -145,6 +121,8 @@
       <workItem from="1743186242982" duration="9429000" />
       <workItem from="1743252079688" duration="5933000" />
       <workItem from="1743260748180" duration="5859000" />
+      <workItem from="1745832823695" duration="3000" />
+      <workItem from="1745832834908" duration="25000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
