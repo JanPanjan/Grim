@@ -1,3 +1,3 @@
 # Grim
 
-Terminal based card gard written in Rust using cursive.
+Terminal based card game written in Rust.
