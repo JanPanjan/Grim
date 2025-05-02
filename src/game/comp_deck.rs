@@ -1,0 +1,1 @@
+// deck od computerja?

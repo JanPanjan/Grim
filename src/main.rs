@@ -1,144 +1,128 @@
+use crossterm::execute;
+use crossterm::terminal::{Clear, ClearType};
 use std::io::{self, Write};
+use std::thread;
+use std::time::Duration;
 
-#[derive(Debug)]
-struct GameState {
-    player: Player,
-    comp: Player,
-}
+pub mod game;
 
-#[derive(Debug, Default)]
-struct Player {
-    is_computer: bool,
-    name: String,
-    nickname: String,
-    hp: u8,
-    hand: Vec<Card>,
-    battlefield: Vec<Card>,
-    graveyard: Vec<Card>,
-    mana_pool: Vec<Card>,
-}
+use game::{GameState, Player};
 
-#[derive(Debug)]
-enum Card {
-    Mana {
-        color: CardColor,
-    },
-    Creature {
-        color: CardColor,
-        cost: u8,
-        att: u8,
-        def: u8,
-    },
-    Sorcery {
-        color: CardColor,
-        cost: u8,
-    },
-    Instant {
-        color: CardColor,
-        cost: u8,
-    },
-}
-
-#[derive(Debug)]
-enum CardColor {
-    White,
-    Red,
-    Green,
-    Blue,
-    Black,
-}
-
-impl Player {
-    fn new(name: String, is_computer: bool) -> Self {
-        match is_computer {
-            true => Player {
-                is_computer,
-                name,
-                nickname: String::from("buttlicker"),
-                hp: 20,
-                hand: Vec::new(),
-                battlefield: Vec::new(),
-                graveyard: Vec::new(),
-                mana_pool: Vec::new(),
-            },
-            false => Player {
-                is_computer,
-                name,
-                nickname: String::from("machine"),
-                hp: 20,
-                hand: Vec::new(),
-                battlefield: Vec::new(),
-                graveyard: Vec::new(),
-                mana_pool: Vec::new(),
-            },
-        }
-    }
-}
-
-// TODO: create a function to fill up players decks with cards
+// TODO: create a function to fill up players librarys with cards
 
 fn main() -> io::Result<()> {
-    print_welcome_message();
+    clear_screen()?;
 
-    // let mut will_load_game = false;
-    let will_load_game = false;
-    let mut play_tutorial = false;
+    println!("");
+    println!("");
+    println!("-------------------- Welcome to GRIM! -----------------------");
+    println!("");
+    println!("This is a terminal emulation of the famous card game, magic");
+    println!("                      the gathering.");
+    println!("");
+    println!("                    New game  - n");
+    println!("                    Load game - l");
+    println!("                    Quit game - q");
 
-    // select an option on first screen
+    let mut state = GameState::new();
+
     loop {
         let choice = get_usr_input(String::from(""))?;
-        if choice == "q" {
-            return Ok(());
-        } else if choice == "l" {
-            // TODO: make it load from file
-            // will_load_game = true;
-            println!("AHH: can't load game from file yet!");
-            continue;
-        } else if choice == "n" {
-            println!("Starting a new game...\n");
-            break;
-        } else {
-            println!("wrong choice.");
-            continue;
+
+        match &choice[0..1] {
+            "q" => return Ok(()),
+            "l" => {
+                // TODO: make it load from file
+                state.will_load_game = true;
+
+                println!("AHH: can't load game from file yet!");
+                continue;
+            }
+            "n" => {
+                state.will_load_game = false;
+
+                println!("Starting a new game...\n");
+                thread::sleep(Duration::from_secs(1));
+                break;
+            }
+            _ => {
+                println!("wrong choice.");
+                continue;
+            }
         }
     }
 
     // if load game was selected, load game state from file
-    if will_load_game {
-        // TODO: add reading file logic here
-    } else {
-        let name = get_usr_input(String::from("What is thy name, wielder of archaic powers?"))?;
-        let p1 = Player::new(name.to_string(), false);
-
-        println!("Welcome, {}! The game is about to start.", &p1.nickname);
-
-        let choice = get_usr_input(String::from(
-            "Would you like to learn the ways of magic the gathering? [y/n]",
-        ))?;
-
-        if &choice[0..0] == "y" {
-            play_tutorial = true;
-            println!(
-                "Fright not, {}. Said game is not so hard to grasp, ",
-                &p1.nickname
-            );
-            println!("you'll get the hang of it quickly.\n");
+    match state.will_load_game {
+        true => {
+            clear_screen()?;
+            // TODO: add reading file logic here
         }
+        false => {
+            clear_screen()?;
+            let player_name =
+                get_usr_input(String::from("What is thy name, wielder of archaic powers?"))?;
 
-        println!("Let us begin the match!");
-        println!("Gather around everyone! A humble novice challenger will throw");
-        println!("cards around with our most feared player here!");
-        println!("Sire oonga boonga!");
+            state.player.set_name(player_name);
+            state.comp.set_name(String::from("Sire Oonga Boonga"));
+
+            clear_screen()?;
+            println!("Welcome, {}!", state.player.nickname());
+
+            loop {
+                let choice = get_usr_input(String::from(
+                    "Would you like to learn the ways of magic the gathering? [y/n]",
+                ))?;
+
+                match &choice[0..1] {
+                    "y" => {
+                        state.play_tutorial = true;
+
+                        clear_screen()?;
+                        println!(
+                            "Fright not, {}. Said game is not so hard to grasp, ",
+                            state.player.nickname()
+                        );
+
+                        thread::sleep(Duration::from_secs(3));
+                        println!("you'll get the hang of it quickly.\n");
+
+                        thread::sleep(Duration::from_secs(2));
+                        break;
+                    }
+                    "n" => {
+                        state.play_tutorial = false;
+
+                        println!("Very well.");
+                        thread::sleep(Duration::from_secs(2));
+                        break;
+                    }
+                    _ => {
+                        println!("wrong choice.");
+                        continue;
+                    }
+                }
+            }
+
+            println!("Let us begin the match!");
+            thread::sleep(Duration::from_secs(3));
+
+            println!("Gather around everyone! A humble novice challenger will throw");
+            println!("cards around with our most feared player here!");
+            thread::sleep(Duration::from_secs(4));
+
+            println!("Sire oonga boonga!");
+        }
     }
 
-    if play_tutorial {}
+    if state.play_tutorial {}
     // if tutorial was selected, display extra prompts about the game and play a scripted game
     // explain the basics through the game
     //
     // [ player ]
     // 1. throw a coin (not random, player goes first)
     // 2. prompt the player to draw cards, tell him how cards are drawn at the beginning of the game
-    // 3. tell the player about cards, decks, how to view hand, what stats mean, what color of card means
+    // 3. tell the player about cards, librarys, how to view hand, what stats mean, what color of card means
     // 4. tell him how mana works (tapping, untapping, playing cards) and prompt him to play a mana card
     // 5. prompt him to play a creature for 1 mana
     // 6. tell him about not being able to tap creatures and therefore not being able to attack on the first turn
@@ -180,23 +164,10 @@ fn main() -> io::Result<()> {
     // TODO: computer struct fill it up
 
     // TODO: start a new game
-    // 1. shuffle decks
+    // 1. shuffle librarys
     // 2. draw cards
 
     Ok(())
-}
-
-fn print_welcome_message() -> () {
-    println!("");
-    println!("");
-    println!("-------------------- Welcome to GRIM! -----------------------");
-    println!("");
-    println!("This is a terminal emulation of the famous card game, magic");
-    println!("                      the gathering.");
-    println!("");
-    println!("                    New game  - n");
-    println!("                    Load game - l");
-    println!("                    Quit game - q");
 }
 
 /// Gets user input. Reads a line from stdin, trims whitespace, returns a String on success,
@@ -208,4 +179,9 @@ fn get_usr_input(msg: String) -> io::Result<String> {
     let mut input = String::new();
     io::stdin().read_line(&mut input)?; // can fail
     Ok(input.trim().to_string())
+}
+
+/// Clears terminal screen
+fn clear_screen() -> io::Result<()> {
+    execute!(io::stdout(), Clear(ClearType::All))
 }
