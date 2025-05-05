@@ -29,16 +29,16 @@ fn main() -> io::Result<()> {
     loop {
         let choice = get_usr_input(String::from(""))?;
 
-        match &choice[0..1] {
-            "q" => return Ok(()),
-            "l" => {
+        match &choice.chars().next() {
+            Some('q') => return Ok(()),
+            Some('l') => {
                 // TODO: make it load from file
                 state.will_load_game = true;
 
                 println!("AHH: can't load game from file yet!");
                 continue;
             }
-            "n" => {
+            Some('n') => {
                 state.will_load_game = false;
 
                 println!("Starting a new game...\n");
@@ -55,11 +55,11 @@ fn main() -> io::Result<()> {
     // if load game was selected, load game state from file
     match state.will_load_game {
         true => {
-            clear_screen()?;
             // TODO: add reading file logic here
         }
         false => {
             clear_screen()?;
+
             let player_name =
                 get_usr_input(String::from("What is thy name, wielder of archaic powers?"))?;
 
@@ -67,6 +67,7 @@ fn main() -> io::Result<()> {
             state.comp.set_name(String::from("Sire Oonga Boonga"));
 
             clear_screen()?;
+
             println!("Welcome, {}!", state.player.nickname());
 
             loop {
@@ -74,8 +75,8 @@ fn main() -> io::Result<()> {
                     "Would you like to learn the ways of magic the gathering? [y/n]",
                 ))?;
 
-                match &choice[0..1] {
-                    "y" => {
+                match &choice.chars().next() {
+                    Some('y') => {
                         state.play_tutorial = true;
 
                         clear_screen()?;
@@ -90,7 +91,7 @@ fn main() -> io::Result<()> {
                         thread::sleep(Duration::from_secs(2));
                         break;
                     }
-                    "n" => {
+                    Some('n') => {
                         state.play_tutorial = false;
 
                         println!("Very well.");
